@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NC Wife — Korean tastebuds, NC kitchen</title>
+<meta name="description" content="The pots, pans and bowls I actually cook with. A Korean kitchen in North Carolina.">
+<meta property="og:title" content="NC Wife — Korean tastebuds, NC kitchen">
+<meta property="og:description" content="The pots, pans and bowls I actually cook with.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EBE3;        /* pale ash-green, like unglazed stoneware */
+  --card:#F7F8F3;
+  --ink:#1F2A24;          /* deep pine */
+  --ink-soft:#5C6B5F;
+  --celadon:#7C9A83;      /* glaze */
+  --celadon-deep:#4E6A57;
+  --yolk:#E0A03A;         /* runny yolk — accent, used sparingly */
+  --line:#D3D8CC;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans KR",system-ui,sans-serif;
+  line-height:1.5;
+  padding:0 20px calc(48px + env(safe-area-inset-bottom));
+  display:flex;justify-content:center;
+}
+.wrap{width:100%;max-width:460px}
+
+/* ---------- header ---------- */
+header{padding:44px 0 26px;text-align:center}
+.avatar{
+  width:88px;height:88px;border-radius:50%;
+  object-fit:cover;display:block;margin:0 auto 16px;
+  border:3px solid var(--card);
+  box-shadow:0 6px 20px rgba(31,42,36,.14);
+  background:var(--celadon);
+}
+h1{
+  font-family:"Gowun Batang",Georgia,serif;
+  font-size:29px;line-height:1.2;font-weight:700;letter-spacing:-.4px;
+}
+h1 .kr{display:block;font-size:20px;font-weight:400;color:var(--ink-soft);margin-top:5px}
+.tagline{margin-top:12px;font-size:14.5px;color:var(--ink-soft)}
+/* ---------- disclosure ---------- */
+.disclosure{
+  margin:22px 0 0;padding:11px 14px;
+  background:rgba(224,160,58,.13);
+  border-left:3px solid var(--yolk);
+  border-radius:0 8px 8px 0;
+  font-size:12px;line-height:1.45;color:var(--ink-soft);
+}
+
+/* ---------- sections ---------- */
+section{margin-top:34px}
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:13px}
+.sec-head h2{
+  font-family:"Gowun Batang",Georgia,serif;
+  font-size:18.5px;font-weight:700;letter-spacing:-.2px;
+}
+.sec-head .rule{flex:1;height:1px;background:var(--line)}
+.sec-note{
+  font-family:"DM Mono",monospace;font-size:10.5px;
+  color:var(--ink-soft);letter-spacing:.3px;
+}
+
+/* ---------- item cards ---------- */
+.item{
+  display:flex;align-items:center;gap:13px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:3px solid transparent;
+  border-radius:var(--radius);
+  padding:14px 15px;margin-bottom:9px;
+  text-decoration:none;color:inherit;
+  transition:border-left-color .22s ease,transform .22s ease,box-shadow .22s ease;
+  opacity:0;transform:translateY(9px);
+  animation:settle .5s cubic-bezier(.22,.9,.3,1) forwards;
+}
+@keyframes settle{to{opacity:1;transform:none}}
+.item:hover,.item:focus-visible{
+  border-left-color:var(--celadon);
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(31,42,36,.09);
+}
+.item:focus-visible{outline:2px solid var(--celadon-deep);outline-offset:3px}
+.item .body{flex:1;min-width:0}
+.item .name{display:block;font-size:15px;font-weight:500;letter-spacing:-.1px}
+.item .desc{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px;line-height:1.35}
+.item .arrow{color:var(--celadon);font-size:17px;flex-shrink:0;line-height:1}
+.item .mark{
+  width:8px;height:8px;border-radius:50%;background:var(--yolk);
+  flex-shrink:0;margin-right:-4px;
+}
+
+/* social */
+.social{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.social a{
+  background:var(--ink);color:var(--card);
+  border-radius:var(--radius);padding:15px 8px;
+  text-align:center;text-decoration:none;
+  font-size:13px;font-weight:500;letter-spacing:.2px;
+  transition:background .2s ease,transform .2s ease;
+}
+.social a:hover,.social a:focus-visible{background:var(--celadon-deep);transform:translateY(-2px)}
+.social a:focus-visible{outline:2px solid var(--celadon-deep);outline-offset:3px}
+
+/* local */
+.local{
+  background:transparent;border:1px dashed var(--line);border-left:1px dashed var(--line);
+}
+.local:hover,.local:focus-visible{border-left-color:var(--line);border-color:var(--celadon)}
+
+footer{
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+  text-align:center;font-size:11.5px;color:var(--ink-soft);line-height:1.6;
+}
+footer a{color:var(--ink-soft)}
+
+@media (prefers-reduced-motion:reduce){
+  .item{animation:none;opacity:1;transform:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   EDIT EVERYTHING BELOW. Nothing else needs to change.
+   ══════════════════════════════════════════════════════════ */
+
+/* Set to true ONLY after Amazon approves you.
+   While false: plain Amazon links, no disclosure shown. */
+const AFFILIATE_MODE = false;
+
+/* Your Amazon tracking ID, e.g. "ncwife-20". Used only when
+   AFFILIATE_MODE is true — it gets appended as ?tag=... */
+const AMAZON_TAG = "ncwife-20";
+
+const PROFILE = {
+  avatar: "profile.jpg",          // drop a square photo next to index.html
+  name: "NC Wife",
+  nameKr: "놀캐부인",
+  tagline: "Korean tastebuds, North Carolina kitchen 🇰🇷🇺🇸"
+};
+
+const SECTIONS = [
+  {
+    title: "Korean kitchen essentials",
+    note: "the heavy hitters",
+    items: [
+      { name: "Le Creuset Rice Pot",  desc: "For sotbap — salmon, mushroom, all of it", url: "https://www.amazon.com/dp/PASTE_ASIN" },
+      { name: "Cuckoo Rice Cooker",   desc: "The one every Korean kitchen has",         url: "https://www.amazon.com/dp/PASTE_ASIN" },
+      { name: "Fissler Stockpot",     desc: "Baeksuk, soups, anything that simmers",    url: "https://www.amazon.com/dp/PASTE_ASIN" },
+      { name: "HexClad Frying Pan",   desc: "Sears salmon without sticking",            url: "https://www.amazon.com/dp/PASTE_ASIN" }
+    ]
+  },
+  {
+    title: "Everyday tools",
+    note: "used almost daily",
+    items: [
+      { name: "Air Fryer",      desc: "Eggs, tofu chips, reheating everything", url: "https://www.amazon.com/dp/PASTE_ASIN" },
+      { name: "Kitchen Knives", desc: "My whole prep routine runs on these",    url: "https://www.amazon.com/dp/PASTE_ASIN" },
+      { name: "Cutting Board",  desc: "Big enough for a full mise en place",    url: "https://www.amazon.com/dp/PASTE_ASIN" }
+    ]
+  },
+  {
+    title: "Bowls & table",
+    note: "what you see on screen",
+    items: [
+      { name: "Ceramic Bowl Set", desc: "The bowls in almost every video", url: "https://www.amazon.com/dp/PASTE_ASIN" }
+    ]
+  }
+];
+
+const SOCIAL = [
+  { name: "YouTube",   url: "https://www.youtube.com/@ncwife" },
+  { name: "Instagram", url: "https://www.instagram.com/PASTE_HANDLE" },
+  { name: "TikTok",    url: "https://www.tiktok.com/@PASTE_HANDLE" }
+];
+
+const LOCAL = [
+  { name: "Howling Cow Creamery", desc: "NC State makes its own ice cream · Raleigh", url: "https://maps.google.com/?q=Howling+Cow+Creamery+Raleigh" },
+  { name: "Boulted Bread",        desc: "The levain in my breakfast videos · Raleigh", url: "https://maps.google.com/?q=Boulted+Bread+Raleigh" },
+  { name: "H Mart Cary",          desc: "Where the Monday hauls happen",               url: "https://maps.google.com/?q=H+Mart+Cary+NC" }
+];
+
+/* ══════════════════════════════════════════════════════════
+   Rendering — no need to touch below this line.
+   ══════════════════════════════════════════════════════════ */
+
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+function amazonUrl(url){
+  if(!AFFILIATE_MODE) return url;
+  try{
+    const u = new URL(url);
+    if(!/amazon\./.test(u.hostname)) return url;
+    u.searchParams.set("tag", AMAZON_TAG);   // never shorten Amazon links
+    return u.toString();
+  }catch{ return url; }
+}
+
+let delay = 0;
+function itemHTML(it, { affiliate = false, local = false } = {}){
+  delay += 45;
+  const href = affiliate ? amazonUrl(it.url) : it.url;
+  const dot  = (affiliate && AFFILIATE_MODE) ? '<span class="mark" aria-hidden="true"></span>' : "";
+  return `<a class="item${local ? " local" : ""}" href="${esc(href)}"
+     target="_blank" rel="${affiliate ? "sponsored noopener" : "noopener"}"
+     style="animation-delay:${delay}ms">
+    ${dot}
+    <span class="body">
+      <span class="name">${esc(it.name)}</span>
+      <span class="desc">${esc(it.desc)}</span>
+    </span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </a>`;
+}
+
+function sectionHTML(title, note, inner){
+  return `<section>
+    <div class="sec-head">
+      <h2>${esc(title)}</h2>
+      <span class="rule"></span>
+      <span class="sec-note">${esc(note)}</span>
+    </div>
+    ${inner}
+  </section>`;
+}
+
+document.getElementById("app").innerHTML = `
+  <header>
+    <img class="avatar" src="${esc(PROFILE.avatar)}" alt="">
+    <h1>${esc(PROFILE.name)}<span class="kr">${esc(PROFILE.nameKr)}</span></h1>
+    <p class="tagline">${esc(PROFILE.tagline)}</p>
+  </header>
+
+  <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
+
+  ${SECTIONS.map(s => sectionHTML(s.title, s.note,
+      s.items.map(i => itemHTML(i, { affiliate:true })).join(""))).join("")}
+
+  ${sectionHTML("Watch", "follow along",
+      `<div class="social">${SOCIAL.map(s =>
+        `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("")}</div>`)}
+
+  ${sectionHTML("NC local finds", "no links, no commission",
+      LOCAL.map(i => itemHTML(i, { local:true })).join(""))}
+
+  <footer>
+    Cooking in North Carolina.<br>
+    <a href="https://www.youtube.com/@ncwife" target="_blank" rel="noopener">@ncwife</a>
+  </footer>`;
+</script>
+</body>
+</html>
