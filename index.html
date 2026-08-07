@@ -138,12 +138,11 @@ footer a{color:var(--ink-soft)}
    EDIT EVERYTHING BELOW. Nothing else needs to change.
    ══════════════════════════════════════════════════════════ */
 
-/* Set to true ONLY after Amazon approves you.
-   While false: plain Amazon links, no disclosure shown. */
-const AFFILIATE_MODE = false;
+/* Amazon approved — affiliate links live.
+   Set to false only if you ever need to temporarily disable tagging. */
+const AFFILIATE_MODE = true;
 
-/* Your Amazon tracking ID, e.g. "ncwife-20". Used only when
-   AFFILIATE_MODE is true — it gets appended as ?tag=... */
+/* Your Amazon tracking ID. Appended automatically as ?tag=... */
 const AMAZON_TAG = "ncwife-20";
 
 const PROFILE = {
@@ -158,40 +157,41 @@ const SECTIONS = [
     title: "Korean kitchen essentials",
     note: "the heavy hitters",
     items: [
-      { name: "Le Creuset Rice Pot",  desc: "For sotbap — salmon, mushroom, all of it", url: "https://www.amazon.com/dp/PASTE_ASIN" },
-      { name: "Cuckoo Rice Cooker",   desc: "The one every Korean kitchen has",         url: "https://www.amazon.com/dp/PASTE_ASIN" },
-      { name: "Fissler Stockpot",     desc: "Baeksuk, soups, anything that simmers",    url: "https://www.amazon.com/dp/PASTE_ASIN" },
-      { name: "HexClad Frying Pan",   desc: "Sears salmon without sticking",            url: "https://www.amazon.com/dp/PASTE_ASIN" }
+      { name: "Le Creuset Rice Pot",       desc: "For sotbap — salmon, mushroom, steak, all of it", url: "https://www.amazon.com/dp/B00VA5HEQC" },
+      { name: "Cuckoo Pressure Rice Cooker", desc: "The one every Korean kitchen has",       url: "https://www.amazon.com/dp/B0BHMW3BQB" },
+      { name: "Fissler Cookware Set",      desc: "Baeksuk, soups, anything that simmers",    url: "https://www.amazon.com/dp/B0BW8T6DD5" },
+      { name: "HexClad Hybrid Frying Pan", desc: "Nothing sticks — even spicy, sticky Korean sauces",            url: "https://www.amazon.com/dp/B09ZBF3856" }
     ]
   },
   {
     title: "Everyday tools",
     note: "used almost daily",
     items: [
-      { name: "Air Fryer",      desc: "Eggs, tofu chips, reheating everything", url: "https://www.amazon.com/dp/PASTE_ASIN" },
-      { name: "Kitchen Knives", desc: "My whole prep routine runs on these",    url: "https://www.amazon.com/dp/PASTE_ASIN" },
-      { name: "Cutting Board",  desc: "Big enough for a full mise en place",    url: "https://www.amazon.com/dp/PASTE_ASIN" }
+      { name: "Cuisinart Air Fryer",   desc: "Eggs, tofu chips, toast, reheating everything", url: "https://www.amazon.com/dp/B09HSWBTN4" },
+      { name: "Ninja Blender & Processor", desc: "Smoothies, sauces, chopping — the one I reach for most", url: "https://www.amazon.com/dp/B08559K7CN" },
+      { name: "Zwilling Knife Set",    desc: "My whole prep routine runs on these",    url: "https://www.amazon.com/dp/B076YQ4V7F" },
+      { name: "Teakhaus Cutting Board", desc: "Big enough to prep everything in one place",   url: "https://www.amazon.com/dp/B007HBROMM" }
     ]
   },
   {
     title: "Bowls & table",
     note: "what you see on screen",
     items: [
-      { name: "Ceramic Bowl Set", desc: "The bowls in almost every video", url: "https://www.amazon.com/dp/PASTE_ASIN" }
+      { name: "Churchill Plate & Bowl Set", desc: "Made in England — the dishes in almost every video", url: "https://www.amazon.com/dp/B0CKWK5XFR" }
     ]
   }
 ];
 
 const SOCIAL = [
-  { name: "YouTube",   url: "https://www.youtube.com/@ncwife" },
-  { name: "Instagram", url: "https://www.instagram.com/PASTE_HANDLE" },
-  { name: "TikTok",    url: "https://www.tiktok.com/@PASTE_HANDLE" }
+  { name: "YouTube",   url: "https://www.youtube.com/@nc_wifey" },
+  { name: "Instagram", url: "https://www.instagram.com/nc_wifey" },
+  { name: "TikTok",    url: "https://www.tiktok.com/@nc_wifey" }
 ];
 
 const LOCAL = [
   { name: "Howling Cow Creamery", desc: "NC State makes its own ice cream · Raleigh", url: "https://maps.google.com/?q=Howling+Cow+Creamery+Raleigh" },
-  { name: "Boulted Bread",        desc: "The levain in my breakfast videos · Raleigh", url: "https://maps.google.com/?q=Boulted+Bread+Raleigh" },
-  { name: "H Mart Cary",          desc: "Where the Monday hauls happen",               url: "https://maps.google.com/?q=H+Mart+Cary+NC" }
+  { name: "Paul & Jack Bakery",   desc: "My go-to bakery · Raleigh",                  url: "https://maps.google.com/?q=Paul+and+Jack+Bakery+Raleigh+NC" },
+  { name: "H Mart Cary",          desc: "Where the Monday hauls happen",              url: "https://maps.google.com/?q=H+Mart+Cary+NC" }
 ];
 
 /* ══════════════════════════════════════════════════════════
@@ -255,12 +255,12 @@ document.getElementById("app").innerHTML = `
       `<div class="social">${SOCIAL.map(s =>
         `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("")}</div>`)}
 
-  ${sectionHTML("NC local finds", "no links, no commission",
+  ${sectionHTML("NC local favorites", "no links, no commission",
       LOCAL.map(i => itemHTML(i, { local:true })).join(""))}
 
   <footer>
     Cooking in North Carolina.<br>
-    <a href="https://www.youtube.com/@ncwife" target="_blank" rel="noopener">@ncwife</a>
+    <a href="https://www.youtube.com/@nc_wifey" target="_blank" rel="noopener">@ncwife</a>
   </footer>`;
 </script>
 </body>
