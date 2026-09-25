@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NC Wifey — Korean tastebuds, NC kitchen</title>
-<meta name="description" content="The pots, pans and bowls I actually cook with. A Korean kitchen in North Carolina.">
-<meta property="og:title" content="NC Wifey — Korean tastebuds, NC kitchen">
-<meta property="og:description" content="The pots, pans and bowls I actually cook with.">
+<title>nc_wifey 놀캐부인 — Korean tastebuds, NC kitchen</title>
+<meta name="description" content="The pots and pans I actually cook with. A Korean kitchen in North Carolina.">
+<meta property="og:title" content="nc_wifey 놀캐부인 — Korean tastebuds, NC kitchen">
+<meta property="og:description" content="The pots and pans I actually cook with.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -112,11 +112,14 @@ section{margin-top:34px}
 .social a:hover,.social a:focus-visible{background:var(--celadon-deep);transform:translateY(-2px)}
 .social a:focus-visible{outline:2px solid var(--celadon-deep);outline-offset:3px}
 
-/* local */
-.local{
-  background:transparent;border:1px dashed var(--line);border-left:1px dashed var(--line);
+/* featured — the one item the current video is about */
+.item.featured{
+  border-left-color:var(--yolk);
+  background:linear-gradient(180deg,#FDFBF5 0%,var(--card) 100%);
+  padding:17px 16px;
 }
-.local:hover,.local:focus-visible{border-left-color:var(--line);border-color:var(--celadon)}
+.item.featured .name{font-size:16px;font-weight:700}
+.item.featured:hover,.item.featured:focus-visible{border-left-color:var(--yolk)}
 
 footer{
   margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
@@ -147,9 +150,17 @@ const AMAZON_TAG = "ncwife-20";
 
 const PROFILE = {
   avatar: "profile.jpg",          // drop a square photo next to index.html
-  name: "NC Wifey",
+  name: "nc_wifey",
   nameKr: "놀캐부인",
   tagline: "Korean tastebuds, North Carolina kitchen 🇰🇷🇺🇸"
+};
+
+/* FEATURED — the one item you most want clicked right now.
+   Swap it whenever the answer changes. Set to null to hide the section. */
+const FEATURED = {
+  name: "Hanging Compost Bin",
+  desc: "Hooks onto the cabinet door right where I prep — lid keeps the smell in",
+  url:  "https://amzn.to/3TRmpo9"
 };
 
 const SECTIONS = [
@@ -159,7 +170,7 @@ const SECTIONS = [
     items: [
       { name: "Le Creuset Rice Pot",       desc: "For sotbap — salmon, mushroom, steak, all of it", url: "https://www.amazon.com/dp/B00VA5HEQC" },
       { name: "Cuckoo Pressure Rice Cooker", desc: "The one every Korean kitchen has",       url: "https://www.amazon.com/dp/B0BHMW3BQB" },
-      { name: "Fissler Cookware Set",      desc: "Baeksuk, soups, anything that simmers",    url: "https://www.amazon.com/dp/B0CTBKYJ55" },
+      { name: "Fissler Cookware Set",      desc: "Baeksuk, soups, anything that simmers",    url: "https://www.amazon.com/dp/B0BW8T6DD5" },
       { name: "HexClad Hybrid Frying Pan", desc: "Nothing sticks — even spicy, sticky Korean sauces",            url: "https://www.amazon.com/dp/B09ZBF3856" }
     ]
   },
@@ -172,13 +183,6 @@ const SECTIONS = [
       { name: "Zwilling Knife Set",    desc: "My whole prep routine runs on these",    url: "https://www.amazon.com/dp/B076YQ4V7F" },
       { name: "Teakhaus Cutting Board", desc: "Big enough to prep everything in one place",   url: "https://www.amazon.com/dp/B007HBROMM" }
     ]
-  },
-  {
-    title: "Bowls & table",
-    note: "what you see on screen",
-    items: [
-      { name: "Churchill Plate & Bowl Set", desc: "Made in England — the dishes in almost every video", url: "https://www.amazon.com/dp/B0CKWK5XFR" }
-    ]
   }
 ];
 
@@ -186,12 +190,6 @@ const SOCIAL = [
   { name: "YouTube",   url: "https://www.youtube.com/@nc_wifey" },
   { name: "Instagram", url: "https://www.instagram.com/nc_wifey" },
   { name: "TikTok",    url: "https://www.tiktok.com/@nc_wifey" }
-];
-
-const LOCAL = [
-  { name: "Howling Cow Creamery", desc: "NC State makes its own ice cream · Raleigh", url: "https://maps.google.com/?q=Howling+Cow+Creamery+Raleigh" },
-  { name: "Paul & Jack Bakery",   desc: "My go-to bakery · Raleigh",                  url: "https://maps.google.com/?q=Paul+and+Jack+Bakery+Raleigh+NC" },
-  { name: "H Mart Cary",          desc: "Where the Monday hauls happen",              url: "https://maps.google.com/?q=H+Mart+Cary+NC" }
 ];
 
 /* ══════════════════════════════════════════════════════════
@@ -205,18 +203,22 @@ function amazonUrl(url){
   if(!AFFILIATE_MODE) return url;
   try{
     const u = new URL(url);
-    if(!/amazon\./.test(u.hostname)) return url;
-    u.searchParams.set("tag", AMAZON_TAG);   // never shorten Amazon links
+    // amzn.to is Amazon's own SiteStripe shortener — the tag is already baked
+    // into the redirect, so leave it alone. Third-party shorteners (bit.ly etc.)
+    // are a terms violation; never use them here.
+    if(/^amzn\.to$/i.test(u.hostname)) return url;
+    if(!/amazon\./i.test(u.hostname)) return url;
+    u.searchParams.set("tag", AMAZON_TAG);
     return u.toString();
   }catch{ return url; }
 }
 
 let delay = 0;
-function itemHTML(it, { affiliate = false, local = false } = {}){
+function itemHTML(it, { affiliate = false, featured = false } = {}){
   delay += 45;
   const href = affiliate ? amazonUrl(it.url) : it.url;
   const dot  = (affiliate && AFFILIATE_MODE) ? '<span class="mark" aria-hidden="true"></span>' : "";
-  return `<a class="item${local ? " local" : ""}" href="${esc(href)}"
+  return `<a class="item${featured ? " featured" : ""}" href="${esc(href)}"
      target="_blank" rel="${affiliate ? "sponsored noopener" : "noopener"}"
      style="animation-delay:${delay}ms">
     ${dot}
@@ -248,6 +250,9 @@ document.getElementById("app").innerHTML = `
 
   <p class="disclosure">As an Amazon Associate, I earn from qualifying purchases.</p>
 
+  ${FEATURED ? sectionHTML("Most asked about", "start here",
+      itemHTML(FEATURED, { affiliate:true, featured:true })) : ""}
+
   ${SECTIONS.map(s => sectionHTML(s.title, s.note,
       s.items.map(i => itemHTML(i, { affiliate:true })).join(""))).join("")}
 
@@ -255,12 +260,9 @@ document.getElementById("app").innerHTML = `
       `<div class="social">${SOCIAL.map(s =>
         `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("")}</div>`)}
 
-  ${sectionHTML("NC local favorites", "no links, no commission",
-      LOCAL.map(i => itemHTML(i, { local:true })).join(""))}
-
   <footer>
     Cooking in North Carolina.<br>
-    <a href="https://www.youtube.com/@nc_wifey" target="_blank" rel="noopener">@ncwife</a>
+    <a href="https://www.youtube.com/@nc_wifey" target="_blank" rel="noopener">@nc_wifey</a>
   </footer>`;
 </script>
 </body>
